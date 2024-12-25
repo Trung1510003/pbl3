@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <title>Three.js with Flask</title>
+  <script type="importmap">
+    {
+      "imports": 
+      {
+        "three": "https://cdn.jsdelivr.net/npm/three@v0.171.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.171.0/examples/jsm/"
+      }
+    }
+    </script>
+</head>
+<body>
+  <div id="background"></div>
+
+
+  <nav class="navbar">
+    <div class="nav-left">
+        <a href="/" class="nav-link">Home</a>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-link">Contact</a>
+      <a href="#" class="nav-link">Sign-In</a>  
+    </div>
+  </nav>
+
+
+  <div class="content">
+    <h1>52Hz-Chat</h1> <br>
+    <h3>Free to use. Easy to try. Just ask and 52Hz-Chat can help with writing, learning, brainstorming, and more.</h3> <br>
+    <a href="/chat" class="bloom-link">Start</a>
+  </div>
+
+
+  <!-- Three JS -->
+  <script type="x-shader/x-vertex" id="vertexshader">
+            
+    attribute float size;
+    attribute vec3 color;
+    attribute float fade;
+
+    varying vec3 vColor;
+
+    void main() {
+      vColor = color;
+      vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+      gl_PointSize = size;
+      gl_Position = projectionMatrix * mvPosition;
+    }
+  </script>
+  <script type="x-shader/x-fragment" id="fragmentshader">
+          
+    uniform sampler2D pointTexture;
+    varying vec3 vColor;
+    void main() {
+      gl_FragColor = vec4(vColor, 1.0);
+      gl_FragColor = gl_FragColor * texture2D(pointTexture, gl_PointCoord);
+    }
+  </script>
+
+  <script type="module">
+    import { setBackground } from "{{ url_for('static', filename='js/script.js') }}";
+    setBackground();
+  </script>
+</body>
+</html>

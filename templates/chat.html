@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+  <title>Three.js with Flask</title>
+  <script type="importmap">
+    {
+      "imports": 
+      {
+        "three": "https://cdn.jsdelivr.net/npm/three@v0.171.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.171.0/examples/jsm/"
+      }
+    }
+    </script>
+</head>
+<body>
+  <div id="background"></div>
+
+  <div class="chat-space glass-effect">
+    <div class="chat-container">
+      <div class="chat-box" id="chat-box">
+        
+      </div>
+      <div class="chat-input">
+        <input type="text" id="message-input" placeholder="Say hello with 52Hz ..." />
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three JS -->
+  <script type="x-shader/x-vertex" id="vertexshader">
+            
+    attribute float size;
+    attribute vec3 color;
+    attribute float fade;
+
+    varying vec3 vColor;
+
+    void main() {
+      vColor = color;
+      vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+      gl_PointSize = size;
+      gl_Position = projectionMatrix * mvPosition;
+    }
+  </script>
+  <script type="x-shader/x-fragment" id="fragmentshader">
+          
+    uniform sampler2D pointTexture;
+    varying vec3 vColor;
+    void main() {
+      gl_FragColor = vec4(vColor, 1.0);
+      gl_FragColor = gl_FragColor * texture2D(pointTexture, gl_PointCoord);
+    }
+  </script>
+
+  <script type="module">
+    import { setBackground } from "{{ url_for('static', filename='js/script.js') }}";
+    setBackground();
+  </script>
+  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+</body>
+</html>
