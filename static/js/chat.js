@@ -10,6 +10,7 @@ async function sendMessage()
 {
     const inputField = document.getElementById('message-input');
     const message = inputField.value.trim();
+    const webSearch = document.getElementById('web-search').checked;
     
     if (message !== "") 
     {
@@ -18,10 +19,12 @@ async function sendMessage()
       
         try 
         {
-            const response = await sendToServer(message);
+            const response = await sendToServer(message, webSearch);
             if (response.ok) {
-              const botMessage = await response.json();  // Giả sử server trả về JSON
-              displayMessage(botMessage.response, 'bot');  // Hiển thị phản hồi từ server
+              const botMessage = await response.json(); 
+              const links = botMessage.links;
+              addlinks(links);
+              displayMessage(botMessage.response, 'bot');  
             } else {
               displayMessage("Sorry, there was an error processing your message.", 'bot');
             }
@@ -50,21 +53,32 @@ function displayMessage(message, sender)
     chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-async function sendToServer(message) {
-    const url = '/ask';  // URL server nhận tin nhắn
-  
+async function sendToServer(message, webSearch) {
+    const url = '/ask'; 
+
     const data = {
-      message: message,  // Gửi tin nhắn dưới dạng 'message'
+      message: message,  
+      webSearch : webSearch
     };
   
     const response = await fetch(url, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',  // Gửi dữ liệu dưới dạng JSON
+        'Content-Type': 'application/json',  
       },
-      body: JSON.stringify(data),  // Chuyển đối tượng thành JSON string
+      body: JSON.stringify(data),  
     });
   
-    return response;  // Trả về phản hồi từ server
+    return response; 
   }
 
+function addlinks(links)
+{
+  const refLink = document.getElementById('link-box')
+  refLink.innerHTML = ``;
+  links.forEach(link => {
+    const adiv = document.createElement('div');
+    adiv.innerHTML = `<a href='${link}'>${link}</a><br><br>`;
+    refLink.appendChild(adiv);
+  });
+}

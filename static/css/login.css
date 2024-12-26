@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+*
+{
+    font-family: 'Be Vietnam Pro';
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    color: white;
+}
+body
+{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+#background
+{
+    display: block;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: -100;
+}
+a
+{
+    text-decoration: none;
+}
+.navbar 
+{
+    position: relative;
+    top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.nav-left .nav-link 
+{
+    font-size: 20px;
+    font-weight: bold;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.nav-right .nav-link 
+{
+    font-size: 20px;
+    margin-left: 20px;
+    font-weight: bold;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.nav-link:hover 
+{
+    text-shadow: 0 0 10px #00BFFF, 0 0 20px #00BFFF, 0 0 30px #00BFFF, 0 0 40px #FFFFFF;  
+}
+
+.glass-effect 
+{
+    background: rgba(255, 255, 255, 0.1);  
+    border-radius: 10px;                  
+    color: white;                          
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.login-container
+{
+    position: fixed;
+    width: 500px;
+    height: 360px;
+    text-align: center;
+    padding: 10px;
+    top: calc(50vh - 175px);
+    left: calc(50vw - 250px);
+}
+
+.register-container
+{
+    position: fixed;
+    width: 500px;
+    height: 550px;
+    text-align: center;
+    padding: 10px;
+    top: calc(50vh - 300px);
+    left: calc(50vw - 250px);
+}
+
+
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #fff;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    margin: 5px 0;
+    font-size: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+#login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #125D98;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#login-btn-reg {
+    width: 100%;
+    padding: 12px;
+    background-color: #125D98;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+
+#register-btn {
+    width: 100%;
+    padding: 12px;
+    color: #125D98;
+    background-color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#register-btn-reg {
+    width: 100%;
+    padding: 12px;
+    color: #125D98;
+    background-color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #125DFF;
+}
+
+p a {
+    color: #4CAF50;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+p a:hover {
+    text-decoration: underline;
+}

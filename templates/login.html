@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
   <title>52Hz chat-bot</title>
   <script type="importmap">
     {
@@ -18,31 +18,45 @@
 <body>
   <div id="background"></div>
 
+
   <nav class="navbar">
     <div class="nav-left">
         <a href="/" class="nav-link">Home</a>
     </div>
   </nav>
 
-  <div class="chat-space glass-effect">
-    <div class="chat-container">
-      <div class="chat-box" id="chat-box">
-        
-      </div>
-      <div class="chat-input">
-        <input type="text" id="message-input" placeholder="Start QA with 52Hz ..." /> 
-        <button id="send-btn">Send</button>
-      </div>
+
+  <div class="login-container glass-effect" style="display: block;">
+    <h2>Login</h2>
+    <div class="input-group">
+        <input type="text" id="username" name="username" placeholder="username" required>
     </div>
-    <div id="link-container">
-      <div class="tt">
-        <input type="checkbox" id="web-search" name="web-search" value="1"> 
-        <label for="web-search">Reference link web-search</label> 
-      </div>  
-      <div id="link-box">
-      </div>
+    <div class="input-group">
+        <input type="password" id="password" name="password" placeholder="password" required>
     </div>
+    <button id="login-btn">Login</button><br><br>
+    <button id="register-btn">Register</button><br><br>
+    <div id="errorMessage" style="color: red; display: none;">Invalid username or password.</div>
   </div>
+
+  <div class="register-container glass-effect" style="display: none;">
+    <h2>Register</h2>
+    <div class="input-group">
+        <input type="text" id="regemail" name="regemail" placeholder="email" required>
+    </div>
+    <div class="input-group">
+        <input type="text" id="regusername" name="regusername" placeholder="username" required>
+    </div>
+    <div class="input-group">
+        <input type="password" id="regpassword" name="regpassword" placeholder="password" required>
+    </div>
+    <div class="input-group">
+        <input type="password" id="regcfpassword" name="regcfpassword" placeholder="confirm password" required>
+    </div>
+    <button id="register-btn-reg">Register</button><br><br>
+    <button id="login-btn-reg">Login</button><br><br>
+  </div>
+
 
   <!-- Three JS -->
   <script type="x-shader/x-vertex" id="vertexshader">
@@ -74,6 +88,6 @@
     import { setBackground } from "{{ url_for('static', filename='js/script.js') }}";
     setBackground();
   </script>
-  <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/login.js') }}"></script>
 </body>
 </html>

@@ -21,14 +21,50 @@ body
     height: 100vh;
     z-index: -100;
 }
+
+.navbar 
+{
+    position: relative;
+    top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.nav-left .nav-link 
+{
+    font-size: 20px;
+    font-weight: bold;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.nav-right .nav-link 
+{
+    font-size: 20px;
+    margin-left: 20px;
+    font-weight: bold;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.nav-link:hover 
+{
+    text-shadow: 0 0 10px #00BFFF, 0 0 20px #00BFFF, 0 0 30px #00BFFF, 0 0 40px #FFFFFF;  
+}
+
+a
+{
+    text-decoration: none;
+}
+
 .chat-space
 {
     display: block;
     position: fixed;
-    top: 5vh;
+    top: 10vh;
     left: 5vh;
     width: calc(100vw - 10vh);
-    height: 90vh;
+    height: 85vh;
 }
 .glass-effect {
     background: rgba(255, 255, 255, 0.2);  
@@ -65,7 +101,7 @@ body
     position: absolute;
     bottom: 3%;
 }
-.chat-input input
+.chat-input #message-input
 {
     margin: 15px;
     padding: 15px;
@@ -106,4 +142,35 @@ body
 {
     text-align: left;
     padding-right: 100px;
+}
+
+#link-container
+{
+    display: block;
+    width: 30%;
+    height: 100%;
+    text-align: left;
+    position: absolute;
+    right: 0;
+    padding: 25px;
+    overflow: hidden;
+}
+
+#link-container .tt
+{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#link-container a:hover
+{
+    text-decoration: underline;
+}
+
+#link-box
+{
+    display: block;
+    width: 100%;
+    text-align: left;
 }

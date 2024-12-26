@@ -1,45 +1,83 @@
-from flask import Flask, render_template, jsonify, request, session
-from flask_session import Session
-from gpt4all import GPT4All
-model_name = "Meta-Llama-3-8B-Instruct.Q4_0.gguf"
-model = GPT4All(model_name=model_name) 
+from flask import Flask, render_template, jsonify, request, session, redirect, url_for
+import Lmodel
+import Lsearch
+import manager
+
 
 app = Flask(__name__)
-
-app.config['SESSION_TYPE'] = 'filesystem' 
-app.config['SECRET_KEY'] = 'zerolife'
-app.config['SESSION_PERMANENT'] = False 
-Session(app)
-
-
-def get_chat_session():
-    if 'chat_session' not in session:
-        session['chat_session'] = model.chat_session()
-    return session['chat_session']
-
-def getans(question):
-    chat_session = get_chat_session()
-    response = model.generate(question)
-    bot_reply = ''.join(response)
-    return bot_reply
+app.secret_key = '52Hz-chatbot' 
+model = Lmodel.loadModel2()
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    log = 0
+    if "username" in session: log = 1
+    return render_template("index.html", log=log)
 
 @app.route("/chat")
 def chat():
     return render_template("chat.html")
 
-@app.route("/ask", methods=['POST'])
-def answer():
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
+@app.route("/login")
+def login():
+    if "username" in session:
+        return redirect(url_for('chat'))
+    return render_template("login.html")
+
+@app.route("/loginCheck", methods=["POST"])
+def loginCheck():
+    data = request.get_json()
+    username = data.get("username", '')
+    password = data.get("password", '')
+    user = manager.get_user(username)
+    if (password==user.password):
+        session['username'] = username
+        return jsonify({"status": "ok"}), 200
+    else:
+        return jsonify({"status": "not-yet"}), 200
+
+@app.route("/regCheck", methods=["POST"])
+def regCheck():
+    data = request.get_json()
+    email = data.get("email", '')
+    username = data.get("username", '')
+    password = data.get("password", '')
+
+    print(email, username, password)
+    user = manager.get_user(username)
+    if user == None:
+        manager.add_user(username=username, password=password, email=email)
+        return jsonify({"status": "ok"}), 200
+    else:
+        return jsonify({"status": "not-yet"}), 200
+
+@app.route("/ask", methods=['POST'])
+def ask():
+    global model
     data = request.get_json()
     user_message = data.get('message', '')
+    web_search = data.get('webSearch','')
+    links = []
     
     if user_message:
-        bot_reply = getans(user_message)
-        return jsonify({'response': bot_reply}), 200
+        print(user_message, web_search)
+        if web_search == True:
+            links, bot_reply = Lsearch.search_google(user_message)
+            context = f'trả lời câu hỏi sau:"{user_message}, dựa vào ngữ cảnh này:"{bot_reply}"'
+            # context = f'trả lời câu hỏi sau:"{user_message}, bằng cách truy cập các đường link sau {links}"'
+            bot_reply = Lmodel.answer2(model=model, context=context)
+        else:
+            bot_reply = Lmodel.answer2(model=model, context=user_message)
+        response = {
+            'response' : bot_reply,
+            'links' : links
+        }
+        return jsonify(response), 200
     else:
         return jsonify({'response': 'No message received!'}), 400
 

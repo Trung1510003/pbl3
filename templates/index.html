@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <title>Three.js with Flask</title>
+  <title>52Hz chat-bot</title>
   <script type="importmap">
     {
       "imports": 
@@ -25,7 +25,11 @@
     </div>
     <div class="nav-right">
       <a href="#" class="nav-link">Contact</a>
-      <a href="#" class="nav-link">Sign-In</a>  
+      {% if log == 0 %}
+      <a href="/login" class="nav-link">Login</a>
+      {% else %}  
+      <a href="/logout" class="nav-link">logout</a>
+      {% endif %}
     </div>
   </nav>
 
