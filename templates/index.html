@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <title>Doc</title>
+  <title>Index</title>
   <script type="importmap">
     {
-      "imports": 
+      "imports":
       {
         "three": "https://cdn.jsdelivr.net/npm/three@v0.171.0/build/three.module.js",
         "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.171.0/examples/jsm/"
@@ -20,20 +20,18 @@
     <div id="background"></div>
     <div id="header">
         <nav class="head">
-            <a class="widget" href="">Giới thiệu</a>
-            <a class="widget" href="">Hướng dẫn</a>
-            <a class="widget" href="">Liên hệ</a>
+            <a class="widget" href="#about">Giới thiệu</a>
+            <a class="widget" href="#guide">Hướng dẫn</a>
+            <a class="widget" href="#contact">Liên hệ</a>
         </nav>
     </div>
     <div id="content">
-        <button type="button" onclick="window.location.href='{{ url_for('static', filename='css/style.css') }}'">Log in</button>
-        <button type="button" onclick="window.location.href='login.html'">Sign up</button>
+        <button type="button" onclick="window.location.href='{{ url_for('index') }}'">Home</button>
+        <button type="button" onclick="window.location.href='{{ url_for('login') }}'">Log in</button>
     </div>
-
 
     <!-- Three JS -->
     <script type="x-shader/x-vertex" id="vertexshader">
-
         attribute float size;
         attribute vec3 color;
         attribute float fade;
@@ -48,7 +46,6 @@
         }
     </script>
     <script type="x-shader/x-fragment" id="fragmentshader">
-
         uniform sampler2D pointTexture;
         varying vec3 vColor;
         void main() {
