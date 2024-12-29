@@ -11,6 +11,8 @@ export function setBackground()
   const pixelRatio = 2;
 
   const scene = new THREE.Scene();
+  // scene.background = new THREE.Color(0xffffff);  // Màu trắng
+
   const camera = new THREE.PerspectiveCamera(
     60,
     background.offsetWidth / background.offsetHeight,
@@ -69,11 +71,11 @@ export function setBackground()
     new THREE.LineBasicMaterial({ transparent: true, color: 0xCFD6DE })
   ];
   let galaxyColors = [
-    new THREE.Color("#f9fbf2").multiplyScalar(0.8),
-    new THREE.Color("#ffede1").multiplyScalar(0.8),
-    new THREE.Color("#05c7f2").multiplyScalar(0.8),
-    new THREE.Color("#0597f2").multiplyScalar(0.8),
-    new THREE.Color("#0476d9").multiplyScalar(0.8)
+    new THREE.Color("#ff69b4").multiplyScalar(0.8),
+    new THREE.Color("#ffd700").multiplyScalar(0.8),
+    new THREE.Color("#32cd32").multiplyScalar(0.8),
+    new THREE.Color("#00bfff").multiplyScalar(0.8),
+    new THREE.Color("#ff8c00").multiplyScalar(0.8)
   ];
   function dots() {
     sampler = new MeshSurfaceSampler(whale).build();
@@ -91,12 +93,14 @@ export function setBackground()
   let whale = null;
   const loader = new OBJLoader();
   loader.load(
-    "./static/asset/Whale.obj",
+    "./static/asset/welcome.obj",
     (obj) => {
+      // whale.scale.set(2, 2, 2);
       whale = obj.children[0];
       whale.geometry.scale(0.3, 0.3, 0.3);
-      whale.geometry.translate(0, -2, 0);
+      whale.geometry.translate(0, 0, 3.5);
       whale.geometry.rotateY(0.2);
+
       dots();
     },
     (xhr) => console.log((xhr.loaded / xhr.total) * 100 + "% loaded"),
@@ -114,7 +118,7 @@ export function setBackground()
 
         for (let i = 0; i < 2; i++) {
           const spark = new Sparkle();
-          spark.setup(p1, line.material.color);
+          spark.setup(p1, line.material.color.set("#ff69b4"));
           sparkles.push(spark);
         }
         ok = true;
@@ -218,8 +222,8 @@ export function setBackground()
 
     galaxyPoints.rotation.y += 0.0005;
 
-    group.rotation.x = Math.sin(a * 0.0003) * 0.1;
-    group.rotation.y += 0.001;
+    group.rotation.x = -0.25;
+    group.rotation.y = -1.8;
 
     if (a - _prev > 30) {
       lines.forEach((l) => {

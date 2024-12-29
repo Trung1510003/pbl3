@@ -12,6 +12,7 @@ body
     width: 100vw;
     height: 100vh;
     overflow: hidden;
+    position: relative;
 }
 #background
 {
@@ -21,59 +22,64 @@ body
     height: 100vh;
     z-index: -100;
 }
-a
-{
-    text-decoration: none;
-}
-.navbar {
-    position: relative;
-    top: 10px;
+
+
+#header {
+    height: 60px;
+    background-color: #000;
+    box-shadow: 0 0 30px 5px #ef3863;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 10px 20px;
 }
 
-.nav-left .nav-link {
-    font-size: 20px;
-    font-weight: bold;
-    transition: color 0.3s, text-shadow 0.3s;
+#header .head a {
+    text-decoration: none;
+    color: #ef3863;
+    margin: 0 25px;
+    font-weight: 500;
+    font-size: 28px;
 }
 
-.nav-right .nav-link {
-    font-size: 20px;
-    margin-left: 20px;
-    font-weight: bold;
-    transition: color 0.3s, text-shadow 0.3s;
-}
+/*#header .head a:hover {*/
+/*    font-size: 33px;*/
+/*    color: #fff;*/
+/*    text-shadow: 0 0 10px #ef3863, 0 0 20px #ef3863, 0 0 30px #ef3863, 0 0 40px #ef3863;*/
+/*}*/
 
-.nav-link:hover {
-    text-shadow: 0 0 10px #00BFFF, 0 0 20px #00BFFF, 0 0 30px #00BFFF, 0 0 40px #FFFFFF;  
-}
-/* ============================================================================================================================= */
-.content
-{
-    text-align: center;
+/*#main {*/
+/*    height: calc(100vh - 60px);*/
+/*    width: 100vw;*/
+/*}*/
+/*#background {*/
+/*    width: 100vw;*/
+/*}*/
+
+
+#content {
     position: absolute;
-    top: 120px;
-    left: 50%;
-    transform:  translateX(-50%);
+    top: calc((100% - 60px)/2 - 80px);
+    right: 70px;
+    width: calc((100vw / 2) - 250px);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
-.bloom-link {
-    font-size: 15px;
-    font-weight: bold;
-    padding: 5px;
-    border-radius: 15px;
-    border: solid 1px white;
-    transition: all 0.3s ease;
-    border-radius: 5px;
+#content button {
+    border: 2px solid #ef3872;
+    background-color: transparent;
+    color: #ef3863;
+    margin: 25px;
+    font-size: 30px;
+    padding: 12px 35px;
+    border-radius: 55px;
+    cursor: pointer;
 }
 
-.bloom-link:hover {
-    color: #FFFFFF; 
-    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 25px #00BFFF, 
-                 0 0 30px #00BFFF, 0 0 35px #1E90FF, 0 0 40px #1E90FF;
-    box-shadow: 0 0 15px #00BFFF, 0 0 25px #00BFFF, 0 0 35px #1E90FF, 
-                0 0 45px #1E90FF; 
+#content button:hover {
+    transform: scale(1.2);
+    text-shadow: 0 0 15px #fff;
 }
